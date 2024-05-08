@@ -6,19 +6,21 @@ public class FlyController : MonoBehaviour
 {
     public float FlySpeed = 5;
     public float TurnSpeed = 120;
+    private Rigidbody thisRigidbody = null;
 
     private float Turn;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        thisRigidbody = this.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
         FlyMovement();
+        thisRigidbody.velocity = Vector3.zero;
     }
 
     void FlyMovement()
