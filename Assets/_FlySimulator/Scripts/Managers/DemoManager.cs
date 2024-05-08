@@ -10,6 +10,7 @@ public class DemoManager : MonoBehaviour
     private void Start()
     {
         Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         humanObject.SetActive(true);
         flyObject.SetActive(false);
     }
@@ -26,9 +27,7 @@ public class DemoManager : MonoBehaviour
     {
         bool humanSetting;
         humanSetting = (humanObject.activeSelf == false) ? true : false;
-        Cursor.lockState = (humanSetting) ? CursorLockMode.Locked : CursorLockMode.None;
         humanObject.SetActive(humanSetting);
-        Cursor.visible = !humanSetting;
         flyObject.SetActive(!humanSetting);
     }
 }

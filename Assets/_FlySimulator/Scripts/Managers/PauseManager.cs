@@ -18,6 +18,16 @@ public class PauseManager : MonoBehaviour
     public void ToggleOverlay()
     {
         pauseOverlay.SetActive(!pauseOverlay.activeSelf);
+        if (pauseOverlay.activeSelf)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 
     public void QuitGame()
