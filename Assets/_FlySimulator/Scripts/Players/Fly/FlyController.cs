@@ -35,11 +35,13 @@ public class FlyController : MonoBehaviour
         //turn
         Turn += horizontalInput * TurnSpeed * Time.deltaTime;
         //rotate vertical
-        float pitch = Mathf.Lerp(0, 20, Mathf.Abs(verticalInput)) * Mathf.Sign(verticalInput);
+        float pitch = Mathf.Lerp(this.transform.localRotation.x, 20, Mathf.Abs(verticalInput)) * Mathf.Sign(verticalInput);
         //rotate horizontal
-        float roll = Mathf.Lerp(0, 30, Mathf.Abs(horizontalInput)) * -Mathf.Sign(horizontalInput);
+        float roll = Mathf.Lerp(this.transform.localRotation.y, 30, Mathf.Abs(horizontalInput)) * -Mathf.Sign(horizontalInput);
 
         //apply rotation
         transform.localRotation = Quaternion.Euler(Vector3.up * Turn + Vector3.right * pitch + Vector3.forward * roll);
+        
+        //transform.localRotation = Quaternion.Euler(Vector3.up * Turn + Vector3.right * (pitch + this.transform.localRotation.x) + Vector3.forward * (roll + this.transform.localRotation.y));
     }
 }
