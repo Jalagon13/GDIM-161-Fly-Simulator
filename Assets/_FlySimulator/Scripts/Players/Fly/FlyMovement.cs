@@ -28,6 +28,12 @@ public class FlyMovement : MonoBehaviour
 		_playerInput.Fly.MouseY.performed += ctx => _mouseInput.y = ctx.ReadValue<float>();
 	}
 
+	private void Start()
+	{
+		Cursor.visible = false;
+		Cursor.lockState = CursorLockMode.Locked;
+	}
+
 	private void OnEnable()
 	{
 		_playerInput.Enable();

@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlyPlayer
+public class FlyPlayer : MonoBehaviour
 {
-    // Start is called before the first frame update
     void Start()
     {
-
+        GameManager.Instance.JoinRound(OnRoundStart, OnRoundEnd, gameObject, false);
+    }
+    
+    private void OnRoundStart()
+    {
+        
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnRoundEnd()
     {
-
+        
     }
 }
