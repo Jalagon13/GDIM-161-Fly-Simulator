@@ -135,13 +135,40 @@
         },
         {
             "name": "Fly",
-            "id": "c1dfe994-4df5-41a6-86e0-88c2d6af2401",
+            "id": "1966055d-faaf-447e-9fbd-11831e95022f",
             "actions": [
                 {
-                    "name": "New action",
-                    "type": "Button",
-                    "id": "7e0f0c59-b8c4-4ec0-958a-dc48ea0a2719",
-                    "expectedControlType": "Button",
+                    "name": "HorizontalMovement",
+                    "type": "PassThrough",
+                    "id": "07acbdce-1057-4df1-859a-f8f990663d78",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "VerticalMovement",
+                    "type": "PassThrough",
+                    "id": "949cd6e9-a665-4cb0-8d6d-9ed68470223d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MouseX",
+                    "type": "PassThrough",
+                    "id": "6a4d9339-2da5-4380-870f-feb77114c29f",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MouseY",
+                    "type": "PassThrough",
+                    "id": "45b224a1-d7c5-4950-b1db-0b09cb8da370",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -149,15 +176,114 @@
             ],
             "bindings": [
                 {
-                    "name": "",
-                    "id": "f3d1257a-c6f5-4cb0-a2d0-dbd4ad284e52",
-                    "path": "",
+                    "name": "WASD",
+                    "id": "7351e2f2-86f8-4970-b1fb-7aa79a089c4f",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "HorizontalMovement",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "62f99963-318b-43fd-ae3c-d1c7ee5cbdfe",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HorizontalMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "9b99682d-8344-40ab-9feb-9cb5cbb0589a",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HorizontalMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "1a409ffb-8789-412a-87cc-7666e76f5ae8",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HorizontalMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "db51c4db-5e3d-4832-8bd8-578bfa3cb6ea",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HorizontalMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "6c0e7998-5ad9-42a0-90b4-26a727caadf4",
+                    "path": "<Mouse>/delta/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MouseX",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "83fbd113-4d8c-4d22-9488-8907cc900adf",
+                    "path": "<Mouse>/delta/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MouseY",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Space/LCtrl",
+                    "id": "893e4b02-5639-4770-bb28-6e88ab8d16ea",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "VerticalMovement",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "5be5fff5-05a4-4222-bd8c-199c31bec083",
+                    "path": "<Keyboard>/leftCtrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "VerticalMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "cc879fd6-5b9a-43e4-b2c0-6c41d221681b",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "VerticalMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }
