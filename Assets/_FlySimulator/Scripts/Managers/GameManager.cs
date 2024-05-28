@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,13 +13,14 @@ public class GameManager : MonoBehaviour
     public float TimeLeft { get; private set; }
     
     [SerializeField] private int playersToStartRound = 4;
-    [SerializeField] private int startHumanHealth;
-    [SerializeField] private float roundTime;
+    [SerializeField] private int startHumanHealth = 100;
+    [SerializeField] private float roundTime = 120;  // seconds
     
     private List<GameObject> _flyPlayers;
     private GameObject _humanPlayer;
     private bool _canJoinRound;
     private bool _roundActive;
+    private bool _restartingRound;
 
     private void Awake()
     {
@@ -30,6 +32,7 @@ public class GameManager : MonoBehaviour
             _humanPlayer = null;
             _canJoinRound = true;
             _roundActive = false;
+            _restartingRound = false;
         }
         else
         {
@@ -69,6 +72,16 @@ public class GameManager : MonoBehaviour
         _roundActive = false;
         OnRoundEnd?.Invoke();
         Debug.Log("Human wins!");
+    }
+
+    IEnumerator RestartRoundAfterSeconds(float seconds)
+    {
+        if (!_restartingRound)
+        {
+            _restartingRound = true;
+            yield return new WaitForSeconds(seconds);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 
     public void DamageHuman(int damage)
