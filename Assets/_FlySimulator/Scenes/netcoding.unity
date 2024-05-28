@@ -2127,7 +2127,7 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 1122051323}
-    PlayerPrefab: {fileID: 7551726223141073012, guid: 02df06cca7d319841b1ef263534e162c, type: 3}
+    PlayerPrefab: {fileID: 9022660837073256230, guid: 4441aa85a6885084aa1d6c9c3c0fc90e, type: 3}
     Prefabs:
       NetworkPrefabsLists:
       - {fileID: 11400000, guid: da98efae75cc4694ba11c76ef752caaa, type: 2}
@@ -2953,7 +2953,7 @@ Transform:
   m_GameObject: {fileID: 1501145825}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -50.028717, y: -99.51631, z: -78.880356}
+  m_LocalPosition: {x: -50.028717, y: -104.51631, z: -78.880356}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

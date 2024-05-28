@@ -2,10 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 
-public class FlyMovement : MonoBehaviour
+public class FlyMovement : NetworkBehaviour//using netcode connection
 {
 	#pragma warning disable 649
 	[SerializeField] private CharacterController _controller;
@@ -46,6 +47,8 @@ public class FlyMovement : MonoBehaviour
 	
 	private void Update()
 	{
+		if (!IsOwner) return;//check if own the object
+
 		Vector3 horizontalVelocity = (transform.right * _horizontalInput.x + transform.forward * _horizontalInput.y) * _horizontalSpeed;
 		_controller.Move(horizontalVelocity * Time.deltaTime);
 
