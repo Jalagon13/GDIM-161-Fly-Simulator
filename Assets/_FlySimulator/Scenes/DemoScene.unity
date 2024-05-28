@@ -1511,6 +1511,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6626504641877165330, guid: 4441aa85a6885084aa1d6c9c3c0fc90e, type: 3}
+      propertyPath: GlobalObjectIdHash
+      value: 3206947850
+      objectReference: {fileID: 0}
     - target: {fileID: 9022660837073256230, guid: 4441aa85a6885084aa1d6c9c3c0fc90e, type: 3}
       propertyPath: m_Name
       value: DraftFly
@@ -1551,7 +1555,7 @@ Rigidbody:
   m_ImplicitCom: 0
   m_ImplicitTensor: 0
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0

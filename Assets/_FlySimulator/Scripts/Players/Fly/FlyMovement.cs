@@ -57,6 +57,7 @@ public class FlyMovement : NetworkBehaviour//using netcode connection
 		
 		float mouseX = _mouseInput.x * _sensitivityX * Time.deltaTime;
 		float mouseY = _mouseInput.y * _sensitivityY * Time.deltaTime;
-		transform.Rotate(-mouseY, mouseX, 0, Space.World);
-	}
+		transform.Rotate(0, mouseX, 0, Space.World);
+        transform.Rotate(-mouseY, 0, 0, Space.Self);
+    }
 }
