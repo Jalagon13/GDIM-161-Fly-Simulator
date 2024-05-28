@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
+using Unity.Netcode;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HumanMovement : MonoBehaviour
+public class HumanMovement : NetworkBehaviour//using netcode connection
 {
 	#pragma warning disable 649
 	[SerializeField] private CharacterController _controller;
@@ -36,28 +38,29 @@ public class HumanMovement : MonoBehaviour
 	
 	private void Update()
 	{
-		_isGrounded = Physics.CheckSphere(transform.position, 0.1f, _groundMask);
-		if(_isGrounded )
-		{
-			_verticalVelocity.y = 0;
-		}
-		
-		Vector3 horizontalVelocity = (transform.right * _horizontalInput.x + transform.forward * _horizontalInput.y) * _speed;
-		
-		_controller.Move(horizontalVelocity * Time.deltaTime);
-		
-		if(_jump)
-		{
-			if(_isGrounded)
-			{
-				_verticalVelocity.y = Mathf.Sqrt(-2f * _jumpHeight * _gravity);
-			}
-			
-			_jump = false;
-		}
-		
-		_verticalVelocity.y += _gravity * Time.deltaTime;
-		_controller.Move(_verticalVelocity * Time.deltaTime);
+        if (!IsOwner) return;//check if own the object
+        _isGrounded = Physics.CheckSphere(transform.position, 0.1f, _groundMask);
+        if (_isGrounded)
+        {
+            _verticalVelocity.y = 0;
+        }
+
+        Vector3 horizontalVelocity = (transform.right * _horizontalInput.x + transform.forward * _horizontalInput.y) * _speed;
+
+        _controller.Move(horizontalVelocity * Time.deltaTime);
+
+        if (_jump)
+        {
+            if (_isGrounded)
+            {
+                _verticalVelocity.y = Mathf.Sqrt(-2f * _jumpHeight * _gravity);
+            }
+
+            _jump = false;
+        }
+
+        _verticalVelocity.y += _gravity * Time.deltaTime;
+        _controller.Move(_verticalVelocity * Time.deltaTime);
 	}
 	
 	private void OnJumpPressed ()
