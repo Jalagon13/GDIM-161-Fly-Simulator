@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.Netcode;
 
-public class MouseLook : MonoBehaviour
+public class MouseLook : NetworkBehaviour//using netcode connection
 {
 	#pragma warning disable 649
 	[SerializeField] private float _sensitivityX = 8f;
@@ -35,7 +36,8 @@ public class MouseLook : MonoBehaviour
 	
 	private void Update()
 	{
-		transform.Rotate(Vector3.up, _mouseX * Time.deltaTime);
+        if (!IsOwner) return;//check if own the object
+        transform.Rotate(Vector3.up, _mouseX * Time.deltaTime);
 		RecieveInput(_mouseInput);
 		_xRotation -= _mouseY;
 		_xRotation = Mathf.Clamp(_xRotation, -xClamp, xClamp);

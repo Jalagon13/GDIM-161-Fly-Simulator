@@ -47,9 +47,9 @@ public class FlyMovement : NetworkBehaviour//using netcode connection
 	
 	private void Update()
 	{
-		if (!IsOwner) return;//check if own the object
+        if (!IsOwner) return;//check if own the object
 
-		Vector3 horizontalVelocity = (transform.right * _horizontalInput.x + transform.forward * _horizontalInput.y) * _horizontalSpeed;
+        Vector3 horizontalVelocity = (transform.right * _horizontalInput.x + transform.forward * _horizontalInput.y) * _horizontalSpeed;
 		_controller.Move(horizontalVelocity * Time.deltaTime);
 
 		Vector3 verticalVelocity = _verticalInput * _verticalSpeed * transform.up;
