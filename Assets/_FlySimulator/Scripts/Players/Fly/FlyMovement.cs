@@ -19,8 +19,9 @@ public class FlyMovement : NetworkBehaviour//using netcode connection
 	private Vector2 _horizontalInput;
 	private float _verticalInput;
 	private Vector2 _mouseInput;
+    private Camera playerCamera;
 
-	private void Awake()
+    private void Awake()
 	{
 		_playerInput = new();
 		_playerInput.Fly.HorizontalMovement.performed += ctx => _horizontalInput = ctx.ReadValue<Vector2>();
@@ -31,7 +32,13 @@ public class FlyMovement : NetworkBehaviour//using netcode connection
 
 	private void Start()
 	{
-		Cursor.visible = false;
+        playerCamera = GetComponentInChildren<Camera>();
+        if (playerCamera != null)
+        {
+            playerCamera.enabled = IsOwner;
+        }
+		//camera enable
+        Cursor.visible = false;
 		Cursor.lockState = CursorLockMode.Locked;
 	}
 

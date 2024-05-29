@@ -12,14 +12,24 @@ public class HumanMovement : NetworkBehaviour//using netcode connection
 	[SerializeField] private float _gravity = -30f;
 	[SerializeField] private float _jumpHeight = 3.5f;
 	[SerializeField] private LayerMask _groundMask;
-	
-	private Vector3 _verticalVelocity = Vector3.zero;
+
+    private Camera playerCamera;
+    private Vector3 _verticalVelocity = Vector3.zero;
 	private PlayerInput _playerInput;
 	private Vector2 _horizontalInput;
 	private bool _isGrounded;
 	private bool _jump;
-	
-	private void Awake()
+
+    private void Start()
+    {
+        playerCamera = GetComponentInChildren<Camera>();
+        if (playerCamera != null)
+        {
+            playerCamera.enabled = IsOwner;
+        }
+    }
+
+    private void Awake()
 	{
 		_playerInput = new();
 		_playerInput.Human.HorizontalMovement.performed += ctx => _horizontalInput = ctx.ReadValue<Vector2>();
