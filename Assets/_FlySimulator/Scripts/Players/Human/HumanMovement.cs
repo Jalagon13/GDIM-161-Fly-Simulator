@@ -12,6 +12,7 @@ public class HumanMovement : NetworkBehaviour//using netcode connection
 	[SerializeField] private float _gravity = -30f;
 	[SerializeField] private float _jumpHeight = 3.5f;
 	[SerializeField] private LayerMask _groundMask;
+	[SerializeField] private Animator animator;
 
     private Camera playerCamera;
     private Vector3 _verticalVelocity = Vector3.zero;
@@ -71,7 +72,15 @@ public class HumanMovement : NetworkBehaviour//using netcode connection
 
         _verticalVelocity.y += _gravity * Time.deltaTime;
         _controller.Move(_verticalVelocity * Time.deltaTime);
-	}
+		if (horizontalVelocity.x > 0 || horizontalVelocity.y > 0 || horizontalVelocity.z > 0)
+		{
+			animator.SetBool("IsMoving", true);
+		}
+		else
+        {
+            animator.SetBool("IsMoving", false);
+        }
+    }
 	
 	private void OnJumpPressed ()
 	{

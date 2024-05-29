@@ -1926,8 +1926,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 119b1e52a4ab9ab4cae58104a594f363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  role1Prefab: {fileID: 4607066876027443615, guid: 2a2e37a489f49a14b9d2f85376029015, type: 3}
-  role2Prefab: {fileID: 9022660837073256230, guid: 4441aa85a6885084aa1d6c9c3c0fc90e, type: 3}
+  role1Prefab: {fileID: 4607066876027443615, guid: 2c5589ab9ad1ab34998a56fe73bf6d2f, type: 3}
+  role2Prefab: {fileID: 9022660837073256230, guid: 5786c9ac46356c84f98f5b2af5356efb, type: 3}
   hostSpawnPoint: {x: 0, y: 0, z: 0}
   clientSpawnPoint: {x: -3, y: 0, z: 0}
 --- !u!1 &1055355269
