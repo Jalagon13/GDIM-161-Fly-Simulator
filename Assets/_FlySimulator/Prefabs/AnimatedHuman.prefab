@@ -234,9 +234,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _controller: {fileID: 367174766428676060}
-  _speed: 11
-  _gravity: -30
-  _jumpHeight: 3.5
+  _speed: 9
+  _gravity: -2
+  _jumpHeight: 0
   _groundMask:
     serializedVersion: 2
     m_Bits: 8
@@ -253,8 +253,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3655dcf6ef0db4220857ba1c1f514d8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sensitivityX: 8
-  _sensitivityY: 0.5
+  _sensitivityX: 7.5
+  _sensitivityY: 0.35
   _playerCamera: {fileID: 5771555459933772793}
   xClamp: 85
 --- !u!1001 &3713173991706434487

@@ -1928,7 +1928,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   role1Prefab: {fileID: 4607066876027443615, guid: 2c5589ab9ad1ab34998a56fe73bf6d2f, type: 3}
   role2Prefab: {fileID: 9022660837073256230, guid: 5786c9ac46356c84f98f5b2af5356efb, type: 3}
-  hostSpawnPoint: {x: 0, y: 0, z: 0}
+  hostSpawnPoint: {x: 0, y: -2.5, z: 0}
   clientSpawnPoint: {x: -3, y: 0, z: 0}
 --- !u!1 &1055355269
 GameObject:

@@ -276,10 +276,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _controller: {fileID: 7516122685093353466}
-  _horizontalSpeed: 11
-  _verticalSpeed: 7
-  _sensitivityX: 100
-  _sensitivityY: 100
+  _horizontalSpeed: 9
+  _verticalSpeed: 5
+  _sensitivityX: 25
+  _sensitivityY: 25
 --- !u!143 &7516122685093353466
 CharacterController:
   m_ObjectHideFlags: 0
