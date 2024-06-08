@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public event Action OnRoundEnd;
     public int HumanHealth { get; private set; }
     public float TimeLeft { get; private set; }
+    public string LocalName { get; private set; }
     
     [SerializeField] private int playersToStartRound = 4;
     [SerializeField] private int startHumanHealth = 100;
