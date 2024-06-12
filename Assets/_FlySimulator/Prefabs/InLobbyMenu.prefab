@@ -468,6 +468,7 @@ MonoBehaviour:
   playerCountText: {fileID: 5813463514635794063}
   lobbyCodeText: {fileID: 7332338673857793983}
   leaveLobbyButton: {fileID: 5844325892860486021}
+  startGameButton: {fileID: 1552681244448290399}
 --- !u!222 &7199622073073591613
 CanvasRenderer:
   m_ObjectHideFlags: 0

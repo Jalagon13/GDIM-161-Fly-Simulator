@@ -1,27 +1,39 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : NetworkBehaviour
 {
     public static GameManager Instance;
     public event Action OnRoundStart;
     public event Action OnRoundEnd;
-    public int HumanHealth { get; private set; }
-    public float TimeLeft { get; private set; }
+    public NetworkVariable<int> HumanHealth { get; private set; } = new NetworkVariable<int>(startHumanHealth,
+                                                                                            NetworkVariableReadPermission.Everyone,
+                                                                                            NetworkVariableWritePermission.Server);
+    public NetworkVariable<float> TimeLeft { get; private set; } = new NetworkVariable<float>(startHumanHealth,
+                                                                                            NetworkVariableReadPermission.Everyone,
+                                                                                            NetworkVariableWritePermission.Server);
     public string LocalName { get; private set; }
     
-    [SerializeField] private int playersToStartRound = 4;
-    [SerializeField] private int startHumanHealth = 100;
-    [SerializeField] private float roundTime = 120;  // seconds
+    [SerializeField] private static int playersToStartRound = 4;
+    [SerializeField] private static int startHumanHealth = 100;
+    [SerializeField] private static float roundTime = 120;  // seconds
     
     private List<GameObject> _flyPlayers;
     private GameObject _humanPlayer;
     private bool _canJoinRound;
-    private bool _roundActive;
-    private bool _restartingRound;
+    private GameManager.RoundMode roundState;
+
+    private enum RoundMode
+    {
+        Menu,
+        Lobby,
+        Active,
+        Restarting
+    }
 
     private void Awake()
     {
@@ -32,8 +44,7 @@ public class GameManager : MonoBehaviour
             _flyPlayers = new();
             _humanPlayer = null;
             _canJoinRound = true;
-            _roundActive = false;
-            _restartingRound = false;
+            roundState = RoundMode.Menu;
         }
         else
         {
@@ -41,45 +52,68 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        //adding listeners for other systems
+        LobbyManager.Instance.OnJoinedLobby += JoinedLobby;
+        LobbyManager.Instance.OnKickedFromLobby += LeftLobby;
+        LobbyManager.Instance.OnLeftLobby += LeftLobby;
+    }
+
+    private void JoinedLobby(object sender, LobbyManager.LobbyEventArgs e)
+    {
+        roundState = RoundMode.Lobby;
+    }
+
+    private void LeftLobby(object sender, System.EventArgs e)
+    {
+        roundState = RoundMode.Menu;
+    }
+
     private void StartRound()
     {
-        HumanHealth = startHumanHealth;
-        _roundActive = true;
-        TimeLeft = roundTime;
+        HumanHealth.Value = startHumanHealth;
+        roundState = RoundMode.Active;
+        TimeLeft.Value = roundTime;
         OnRoundStart?.Invoke();
     }
 
     private void Update()
     {
-        if (_roundActive)
+        if (roundState == RoundMode.Active)
         {
-            TimeLeft = Math.Max(0, TimeLeft - Time.deltaTime);
-            if (TimeLeft == 0)
+            TimeLeft.Value = Math.Max(0, TimeLeft.Value - Time.deltaTime);
+            if (TimeLeft.Value == 0)
             {
                 HumanWinRound();
             }
         }
     }
 
+    private void OnStartGame(object sender, LobbyManager.LobbyEventArgs e)
+    {
+        SceneManager.LoadScene("netcoding");
+        _flyPlayers.Add(null);                  //FIND PLAYERS SOMEHOW
+        _humanPlayer = null;                    //FIND PLAYERS SOMEHOW
+    }
+
     private void FlyWinRound()
     {
-        _roundActive = false;
         OnRoundEnd?.Invoke();
         Debug.Log("Flies win!");
     }
 
     private void HumanWinRound()
     {
-        _roundActive = false;
         OnRoundEnd?.Invoke();
         Debug.Log("Human wins!");
     }
 
     IEnumerator RestartRoundAfterSeconds(float seconds)
     {
-        if (!_restartingRound)
+        if (roundState != RoundMode.Restarting)
         {
-            _restartingRound = true;
+            roundState = RoundMode.Restarting;
             yield return new WaitForSeconds(seconds);
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
@@ -87,13 +121,13 @@ public class GameManager : MonoBehaviour
 
     public void DamageHuman(int damage)
     {
-        if (!_roundActive)
+        if (roundState != RoundMode.Active)
         {
             return;
         }
         
-        HumanHealth = Math.Max(0, HumanHealth - damage);
-        if (HumanHealth == 0)
+        HumanHealth.Value = Math.Max(0, HumanHealth.Value - damage);
+        if (HumanHealth.Value == 0)
         {
             FlyWinRound();
         }

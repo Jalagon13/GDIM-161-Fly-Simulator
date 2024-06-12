@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using Unity.Services.Lobbies;
@@ -31,6 +32,9 @@ public class LobbyManager : MonoBehaviour {
     public event EventHandler<LobbyEventArgs> OnJoinedLobby;
     public event EventHandler<LobbyEventArgs> OnJoinedLobbyUpdate;
     public event EventHandler<LobbyEventArgs> OnKickedFromLobby;
+
+    public event EventHandler<LobbyEventArgs> StartGame;
+
     public class LobbyEventArgs : EventArgs {
         public Lobby lobby;
     }
@@ -199,6 +203,27 @@ public class LobbyManager : MonoBehaviour {
         {
             Debug.Log(e);
             LobbyErrorOccur.Invoke(this, EventArgs.Empty);
+        }
+    }
+
+    public void StartGameMethod()
+    {
+        if (joinedLobby != null && joinedLobby.Players.Count == joinedLobby.MaxPlayers)
+        {
+            StartGame?.Invoke(this, new LobbyEventArgs { lobby = LobbyManager.Instance.GetJoinedLobby() });
+            Debug.Log("StartGame event invoked!");
+            /*if (IsLobbyHost())
+            {
+                NetworkManager.Singleton.StartHost();
+            }
+            else
+            {
+                NetworkManager.Singleton.StartClient();
+            }*/
+        }
+        else
+        {
+            Debug.Log("Lobby not ready to start.");
         }
     }
 

@@ -671,6 +671,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4837444978343058829}
     m_Modifications:
+    - target: {fileID: 1750071016719602007, guid: 1e6c75bd321214b4a8a3fcea3aa0be7e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -61.89502
+      objectReference: {fileID: 0}
     - target: {fileID: 1772059491903492345, guid: 1e6c75bd321214b4a8a3fcea3aa0be7e, type: 3}
       propertyPath: m_Name
       value: InLobbyMenu
@@ -1193,7 +1197,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3488761249200514621, guid: ebcc4e917b10dd54fa6b8c951dcf90e9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.0037231445
+      value: 0.0036621094
       objectReference: {fileID: 0}
     - target: {fileID: 3488761249200514621, guid: ebcc4e917b10dd54fa6b8c951dcf90e9, type: 3}
       propertyPath: m_AnchoredPosition.y

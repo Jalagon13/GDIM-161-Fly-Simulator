@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -5,6 +6,7 @@ using Unity.Services.Authentication;
 using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.UI;
+using static LobbyManager;
 
 //Code from CodeMonkey Tutorial!!!! Project download.
 //Modified for our game's purposes by Alaina Klaes.
@@ -20,6 +22,7 @@ public class LobbyUI : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI playerCountText;
     [SerializeField] private TextMeshProUGUI lobbyCodeText;
     [SerializeField] private Button leaveLobbyButton;
+    [SerializeField] private Button startGameButton;
 
 
     private void Awake() {
@@ -27,6 +30,10 @@ public class LobbyUI : MonoBehaviour {
 
         leaveLobbyButton.onClick.AddListener(() => {
             LobbyManager.Instance.LeaveLobby();
+        });
+
+        startGameButton.onClick.AddListener(() => {
+            LobbyManager.Instance.StartGameMethod();
         });
     }
 
