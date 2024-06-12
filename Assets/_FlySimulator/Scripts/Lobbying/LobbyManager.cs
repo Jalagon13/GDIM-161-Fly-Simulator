@@ -72,6 +72,7 @@ public class LobbyManager : MonoBehaviour {
     }
 
     public async void Authenticate(string playerName) {
+        try {
         this.playerName = playerName;
         InitializationOptions initializationOptions = new InitializationOptions();
         initializationOptions.SetProfile(playerName);
@@ -86,6 +87,12 @@ public class LobbyManager : MonoBehaviour {
         };
 
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
+        }
+        catch (LobbyServiceException e)
+        {
+            Debug.Log(e);
+            LobbyErrorOccur.Invoke(this, EventArgs.Empty);
+        }
     }
 
     private void HandleRefreshLobbyList() {
@@ -191,6 +198,7 @@ public class LobbyManager : MonoBehaviour {
         catch (LobbyServiceException e)
         {
             Debug.Log(e);
+            LobbyErrorOccur.Invoke(this, EventArgs.Empty);
         }
     }
 
@@ -219,6 +227,7 @@ public class LobbyManager : MonoBehaviour {
             OnLobbyListChanged?.Invoke(this, new OnLobbyListChangedEventArgs { lobbyList = lobbyListQueryResponse.Results });
         } catch (LobbyServiceException e) {
             Debug.Log(e);
+            LobbyErrorOccur.Invoke(this, EventArgs.Empty);
         }
     }
 
