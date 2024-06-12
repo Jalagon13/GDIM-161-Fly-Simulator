@@ -201,6 +201,21 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+--- !u!1 &607824353 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6204019742466867724, guid: d352accef017c3745a4a7080286fc13a, type: 3}
+  m_PrefabInstance: {fileID: 177897271200004672}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &703415020 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6828973075317841948, guid: d352accef017c3745a4a7080286fc13a, type: 3}
+  m_PrefabInstance: {fileID: 177897271200004672}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &804221786 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1852235418050736136, guid: d352accef017c3745a4a7080286fc13a, type: 3}
+  m_PrefabInstance: {fileID: 177897271200004672}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1589755288
 GameObject:
   m_ObjectHideFlags: 0
@@ -267,6 +282,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 251c5a724f65c42fcb69ec92d9fae069, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1680478064 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6148375150275897183, guid: d352accef017c3745a4a7080286fc13a, type: 3}
+  m_PrefabInstance: {fileID: 177897271200004672}
+  m_PrefabAsset: {fileID: 0}
 --- !u!20 &1739487403 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 251370638935244521, guid: 24095ea6004a1404b83ee8fff02497e5, type: 3}
@@ -614,6 +634,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5780615982185365876, guid: d352accef017c3745a4a7080286fc13a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -687,11 +711,11 @@ PrefabInstance:
     - target: {fileID: 5270956998832743641, guid: a6dee43aa2ef46c4e8839b9a5f3a4524, type: 3}
       propertyPath: inLobbyUI
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 804221786}
     - target: {fileID: 5270956998832743641, guid: a6dee43aa2ef46c4e8839b9a5f3a4524, type: 3}
       propertyPath: findLobbyUI
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 607824353}
     - target: {fileID: 5270956998832743641, guid: a6dee43aa2ef46c4e8839b9a5f3a4524, type: 3}
       propertyPath: joinLobbyUI
       value: 
@@ -699,11 +723,11 @@ PrefabInstance:
     - target: {fileID: 5270956998832743641, guid: a6dee43aa2ef46c4e8839b9a5f3a4524, type: 3}
       propertyPath: errorMessage
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1680478064}
     - target: {fileID: 5270956998832743641, guid: a6dee43aa2ef46c4e8839b9a5f3a4524, type: 3}
       propertyPath: createLobbyUI
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 703415020}
     - target: {fileID: 5789336809186697858, guid: a6dee43aa2ef46c4e8839b9a5f3a4524, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1013.5443
