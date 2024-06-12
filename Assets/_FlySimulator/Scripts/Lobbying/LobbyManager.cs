@@ -196,8 +196,9 @@ public class LobbyManager : MonoBehaviour {
         joinedLobby = lobby;
 
         OnJoinedLobby?.Invoke(this, new LobbyEventArgs { lobby = lobby });
+        ToggleCurrentOffAndLobbyUIOn();
 
-        Debug.Log("Created Lobby " + lobby.Name);
+            Debug.Log("Created Lobby " + lobby.Name);
         }
         catch (LobbyServiceException e)
         {

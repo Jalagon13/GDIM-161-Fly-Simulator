@@ -42,8 +42,6 @@ public class LobbyUI : MonoBehaviour {
         LobbyManager.Instance.OnJoinedLobbyUpdate += UpdateLobby_Event;
         LobbyManager.Instance.OnLeftLobby += LobbyManager_OnLeftLobby;
         LobbyManager.Instance.OnKickedFromLobby += LobbyManager_OnLeftLobby;
-
-        Hide();
     }
 
     private void LobbyManager_OnLeftLobby(object sender, System.EventArgs e) {
