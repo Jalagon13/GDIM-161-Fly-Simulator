@@ -13,32 +13,25 @@ public class LobbyCreateUI : MonoBehaviour {
 
 
     [SerializeField] private Button createButton;
-    [SerializeField] private Button lobbyNameButton;
     [SerializeField] private Button publicPrivateButton;
-    [SerializeField] private Button maxPlayersButton;
-    [SerializeField] private Button gameModeButton;
-    [SerializeField] private TextMeshProUGUI lobbyNameText;
     [SerializeField] private TextMeshProUGUI publicPrivateText;
-    [SerializeField] private TextMeshProUGUI maxPlayersText;
-    [SerializeField] private TextMeshProUGUI gameModeText;
-    [SerializeField] private TMP_InputField playerNameInputField;
     [SerializeField] private TMP_InputField lobbyNameInputField;
 
 
     private string lobbyName;
     private bool isPrivate;
-    private int maxPlayers;
+    private int maxPlayers = 4;
 
     private void Awake() {
         Instance = this;
 
         createButton.onClick.AddListener(() => {
+            UpdateLobbyNameText();
             LobbyManager.Instance.CreateLobby(
                 lobbyName,
                 maxPlayers,
                 isPrivate
             );
-            Hide();
         });
 
 
@@ -48,22 +41,21 @@ public class LobbyCreateUI : MonoBehaviour {
             UpdateText();
         });
 
-        Hide();
+        lobbyNameInputField.onValueChanged.AddListener(delegate { UpdateLobbyNameText(); });
+    }
+
+    private void UpdateLobbyNameText()
+    {
+        lobbyName = ValidateText.ReturnValidString(lobbyNameInputField.text);
+        Debug.Log($"Updated LobbyNameText to {lobbyName}");
     }
 
     private void UpdateText() {
-        lobbyNameText.text = lobbyName;
-        publicPrivateText.text = isPrivate ? "Private" : "Public";
-        maxPlayersText.text = maxPlayers.ToString();
+        publicPrivateText.text = isPrivate ? "<color=#DD1800>Private</color>" : "<color=#70CC00>Public</color>";
     }
 
-    private void Hide() {
-        gameObject.SetActive(false);
-    }
-
-    public void Show() {
-        gameObject.SetActive(true);
-
+    public void OnEnable() {
+        Debug.Log("Performing OnEnable function!");
         lobbyName = "MyLobby";
         isPrivate = false;
         maxPlayers = 4;

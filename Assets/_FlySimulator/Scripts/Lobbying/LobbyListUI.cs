@@ -25,7 +25,6 @@ public class LobbyListUI : MonoBehaviour {
         lobbySingleTemplate.gameObject.SetActive(false);
 
         refreshButton.onClick.AddListener(RefreshButtonClick);
-        createLobbyButton.onClick.AddListener(CreateLobbyButtonClick);
     }
 
     private void Start() {
@@ -68,10 +67,6 @@ public class LobbyListUI : MonoBehaviour {
 
     private void RefreshButtonClick() {
         LobbyManager.Instance.RefreshLobbyList();
-    }
-
-    private void CreateLobbyButtonClick() {
-        LobbyCreateUI.Instance.Show();
     }
 
     private void Hide() {
