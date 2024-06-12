@@ -4,21 +4,27 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //Code from CodeMonkey Tutorial!!!! Project download.
+//Modified for our game's purposes by Alaina Klaes.
 public class AuthenticateUI : MonoBehaviour {
 
 
     [SerializeField] private Button authenticateButton;
 
 
-    private void Awake() {
+    private void Start() {
         authenticateButton.onClick.AddListener(() => {
-            LobbyManager.Instance.Authenticate(EditPlayerName.Instance.GetPlayerName());
-            Hide();
-        });
-    }
+            if (LobbyManager.Instance == null)
+            {
+                Debug.Log("LobbyManager Instance null!");
+            }
+            if (EditPlayerName.Instance == null)
+            {
+                Debug.Log("EditPlayerName Instance null!");
+            }
 
-    private void Hide() {
-        gameObject.SetActive(false);
+            Debug.Log($"EditPlayerName GetPlayerName == {EditPlayerName.Instance.GetPlayerName()}");
+            LobbyManager.Instance.Authenticate(EditPlayerName.Instance.GetPlayerName());
+        });
     }
 
 }
