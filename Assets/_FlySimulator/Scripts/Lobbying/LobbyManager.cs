@@ -259,15 +259,16 @@ public class LobbyManager : MonoBehaviour {
     public async void JoinLobbyByCode(string lobbyCode) {
         try
         {
-        Player player = GetPlayer(false);
+            Player player = GetPlayer(false);
 
-        Lobby lobby = await LobbyService.Instance.JoinLobbyByCodeAsync(lobbyCode, new JoinLobbyByCodeOptions {
-            Player = player
-        });
+            Lobby lobby = await LobbyService.Instance.JoinLobbyByCodeAsync(lobbyCode, new JoinLobbyByCodeOptions {
+                Player = player
+            });
 
-        joinedLobby = lobby;
+            joinedLobby = lobby;
 
-        OnJoinedLobby?.Invoke(this, new LobbyEventArgs { lobby = lobby });
+            OnJoinedLobby?.Invoke(this, new LobbyEventArgs { lobby = lobby });
+            ToggleCurrentOffAndLobbyUIOn();
         }
         catch (LobbyServiceException e)
         {
@@ -287,6 +288,7 @@ public class LobbyManager : MonoBehaviour {
             });
 
             OnJoinedLobby?.Invoke(this, new LobbyEventArgs { lobby = lobby });
+            ToggleCurrentOffAndLobbyUIOn();
         }
         catch (LobbyServiceException e)
         {
@@ -358,6 +360,7 @@ public class LobbyManager : MonoBehaviour {
             joinedLobby = lobby;
 
             OnJoinedLobby?.Invoke(this, new LobbyEventArgs { lobby = lobby });
+            ToggleCurrentOffAndLobbyUIOn();
         } catch (LobbyServiceException e) {
             Debug.Log(e);
             LobbyErrorOccur.Invoke(this, EventArgs.Empty);
