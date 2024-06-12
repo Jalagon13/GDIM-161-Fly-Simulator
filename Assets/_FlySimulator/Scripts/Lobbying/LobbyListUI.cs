@@ -31,6 +31,8 @@ public class LobbyListUI : MonoBehaviour {
 
         refreshButton.onClick.AddListener(RefreshButtonClick);
         joinButton.onClick.AddListener(JoinButtonClick);
+
+        joinCodeInputField.onValueChanged.AddListener(delegate { UpdateJoinCodeText(); });
     }
 
     private void Start() {
@@ -83,6 +85,7 @@ public class LobbyListUI : MonoBehaviour {
 
     private void JoinButtonClick()
     {
+        UpdateJoinCodeText();
         LobbyManager.Instance.JoinLobbyByCode(currentJoinCode);
     }
 

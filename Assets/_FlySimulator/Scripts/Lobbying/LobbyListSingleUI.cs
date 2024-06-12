@@ -21,6 +21,7 @@ public class LobbyListSingleUI : MonoBehaviour {
     private void Awake() {
         joinButton.onClick.AddListener(() => {
             LobbyManager.Instance.JoinLobby(lobby);
+            this.transform.parent.gameObject.SetActive(false);
         });
     }
 

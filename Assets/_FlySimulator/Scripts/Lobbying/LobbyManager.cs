@@ -17,6 +17,9 @@ public class LobbyManager : MonoBehaviour {
 
     public const string KEY_PLAYER_NAME = "PlayerName";
     public const string KEY_PLAYER_CHARACTER = "Character";
+    [SerializeField] private GameObject findLobbyUI;
+    [SerializeField] private GameObject createLobbyUI;
+    [SerializeField] private GameObject inLobbyUI;
     [SerializeField] private GameObject errorMessage;
 
     public event EventHandler LobbyErrorOccur;
@@ -133,6 +136,13 @@ public class LobbyManager : MonoBehaviour {
         }
     }
 
+    public void ToggleCurrentOffAndLobbyUIOn()
+    {
+        findLobbyUI.SetActive(false);
+        createLobbyUI.SetActive(false);
+        inLobbyUI.SetActive(true);
+    }
+
     public Lobby GetJoinedLobby() {
         return joinedLobby;
     }
@@ -162,6 +172,7 @@ public class LobbyManager : MonoBehaviour {
     }
 
     public async void CreateLobby(string lobbyName, int maxPlayers, bool isPrivate) {
+        try {
         Player player = GetPlayer(true);
 
         CreateLobbyOptions options = new CreateLobbyOptions {
@@ -176,6 +187,11 @@ public class LobbyManager : MonoBehaviour {
         OnJoinedLobby?.Invoke(this, new LobbyEventArgs { lobby = lobby });
 
         Debug.Log("Created Lobby " + lobby.Name);
+        }
+        catch (LobbyServiceException e)
+        {
+            Debug.Log(e);
+        }
     }
 
     public async void RefreshLobbyList() {
@@ -219,8 +235,9 @@ public class LobbyManager : MonoBehaviour {
 
         OnJoinedLobby?.Invoke(this, new LobbyEventArgs { lobby = lobby });
         }
-        catch
+        catch (LobbyServiceException e)
         {
+            Debug.Log(e);
             LobbyErrorOccur.Invoke(this, EventArgs.Empty);
         }
     }

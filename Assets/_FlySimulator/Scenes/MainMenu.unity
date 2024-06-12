@@ -206,6 +206,16 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6148375150275897183, guid: d352accef017c3745a4a7080286fc13a, type: 3}
   m_PrefabInstance: {fileID: 177897271200004672}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &493410635 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1852235418050736136, guid: d352accef017c3745a4a7080286fc13a, type: 3}
+  m_PrefabInstance: {fileID: 177897271200004672}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &594685326 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6204019742466867724, guid: d352accef017c3745a4a7080286fc13a, type: 3}
+  m_PrefabInstance: {fileID: 177897271200004672}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1290584848
 GameObject:
   m_ObjectHideFlags: 0
@@ -589,6 +599,11 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
+--- !u!1 &2004420943 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6828973075317841948, guid: d352accef017c3745a4a7080286fc13a, type: 3}
+  m_PrefabInstance: {fileID: 177897271200004672}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &177897271200004672
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -601,18 +616,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1290584851}
-    - target: {fileID: 1187950572416080602, guid: d352accef017c3745a4a7080286fc13a, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1187950572416080602, guid: d352accef017c3745a4a7080286fc13a, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1187950572416080602, guid: d352accef017c3745a4a7080286fc13a, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3425852484403156736, guid: d352accef017c3745a4a7080286fc13a, type: 3}
       propertyPath: m_Name
       value: MainMenuCanvas
@@ -697,18 +700,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8553022151608771327, guid: d352accef017c3745a4a7080286fc13a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8553022151608771327, guid: d352accef017c3745a4a7080286fc13a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 378001063}
-    - target: {fileID: 8553022151608771327, guid: d352accef017c3745a4a7080286fc13a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SetActive
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -723,9 +714,25 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5270956998832743641, guid: a6dee43aa2ef46c4e8839b9a5f3a4524, type: 3}
+      propertyPath: inLobbyUI
+      value: 
+      objectReference: {fileID: 493410635}
+    - target: {fileID: 5270956998832743641, guid: a6dee43aa2ef46c4e8839b9a5f3a4524, type: 3}
+      propertyPath: findLobbyUI
+      value: 
+      objectReference: {fileID: 594685326}
+    - target: {fileID: 5270956998832743641, guid: a6dee43aa2ef46c4e8839b9a5f3a4524, type: 3}
+      propertyPath: joinLobbyUI
+      value: 
+      objectReference: {fileID: 594685326}
+    - target: {fileID: 5270956998832743641, guid: a6dee43aa2ef46c4e8839b9a5f3a4524, type: 3}
       propertyPath: errorMessage
       value: 
       objectReference: {fileID: 378001063}
+    - target: {fileID: 5270956998832743641, guid: a6dee43aa2ef46c4e8839b9a5f3a4524, type: 3}
+      propertyPath: createLobbyUI
+      value: 
+      objectReference: {fileID: 2004420943}
     - target: {fileID: 5789336809186697858, guid: a6dee43aa2ef46c4e8839b9a5f3a4524, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1013.5443

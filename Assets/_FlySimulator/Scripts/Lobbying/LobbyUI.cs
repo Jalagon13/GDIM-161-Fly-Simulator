@@ -46,10 +46,12 @@ public class LobbyUI : MonoBehaviour {
 
     private void UpdateLobby_Event(object sender, LobbyManager.LobbyEventArgs e) {
         UpdateLobby();
+        Show();
     }
 
     private void UpdateLobby() {
         UpdateLobby(LobbyManager.Instance.GetJoinedLobby());
+        Show();
     }
 
     private void UpdateLobby(Lobby lobby) {
@@ -87,6 +89,7 @@ public class LobbyUI : MonoBehaviour {
     }
 
     private void Show() {
+        Debug.Log("Should be showing LobbyUI!");
         gameObject.SetActive(true);
     }
 
