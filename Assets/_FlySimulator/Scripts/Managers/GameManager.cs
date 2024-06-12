@@ -58,6 +58,7 @@ public class GameManager : NetworkBehaviour
         LobbyManager.Instance.OnJoinedLobby += JoinedLobby;
         LobbyManager.Instance.OnKickedFromLobby += LeftLobby;
         LobbyManager.Instance.OnLeftLobby += LeftLobby;
+        LobbyManager.Instance.StartGame += OnStartGame;
     }
 
     private void JoinedLobby(object sender, LobbyManager.LobbyEventArgs e)
