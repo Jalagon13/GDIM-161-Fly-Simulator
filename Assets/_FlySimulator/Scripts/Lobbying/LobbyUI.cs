@@ -18,6 +18,7 @@ public class LobbyUI : MonoBehaviour {
     [SerializeField] private Transform container;
     [SerializeField] private TextMeshProUGUI lobbyNameText;
     [SerializeField] private TextMeshProUGUI playerCountText;
+    [SerializeField] private TextMeshProUGUI lobbyCodeText;
     [SerializeField] private Button leaveLobbyButton;
 
 
@@ -69,6 +70,7 @@ public class LobbyUI : MonoBehaviour {
 
         lobbyNameText.text = lobby.Name;
         playerCountText.text = lobby.Players.Count + "/" + lobby.MaxPlayers;
+        lobbyCodeText.text = lobby.LobbyCode;
 
         Show();
     }
@@ -88,4 +90,8 @@ public class LobbyUI : MonoBehaviour {
         gameObject.SetActive(true);
     }
 
+    private void OnEnabled()
+    {
+        UpdateLobby(LobbyManager.Instance.GetJoinedLobby());
+    }
 }

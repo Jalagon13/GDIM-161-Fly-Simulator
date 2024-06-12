@@ -399,8 +399,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3590945840789475109}
   - component: {fileID: 4755494441882461510}
+  - component: {fileID: 259264070420600695}
   - component: {fileID: 5455918643407044003}
-  - component: {fileID: 6641491719425809759}
   m_Layer: 5
   m_Name: UILobbyItem
   m_TagString: Untagged
@@ -438,6 +438,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7168051977600987690}
   m_CullTransparentMesh: 1
+--- !u!114 &259264070420600695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7168051977600987690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e337cb0ba2507784da6f315a8a46d079, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lobbyNameText: {fileID: 5747346870632496986}
+  playersText: {fileID: 2591258245308150442}
+  joinButton: {fileID: 5582851974134755755}
 --- !u!114 &5455918643407044003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -468,18 +483,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6641491719425809759
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7168051977600987690}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b0298e5b6c2c5c489af6f1dfbf51900, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8301433243932171552
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 //Code from CodeMonkey Tutorial!!!! Project download.
+//Modified for our game's purposes by Alaina Klaes.
 public class LobbyListUI : MonoBehaviour {
 
 
@@ -16,7 +17,6 @@ public class LobbyListUI : MonoBehaviour {
     [SerializeField] private Transform lobbySingleTemplate;
     [SerializeField] private Transform container;
     [SerializeField] private Button refreshButton;
-    [SerializeField] private Button createLobbyButton;
 
 
     private void Awake() {

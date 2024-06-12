@@ -466,12 +466,8 @@ MonoBehaviour:
   container: {fileID: 1171397291040944934}
   lobbyNameText: {fileID: 1510675077768533784}
   playerCountText: {fileID: 5813463514635794063}
-  gameModeText: {fileID: 0}
-  changeMarineButton: {fileID: 0}
-  changeNinjaButton: {fileID: 0}
-  changeZombieButton: {fileID: 0}
+  lobbyCodeText: {fileID: 0}
   leaveLobbyButton: {fileID: 5844325892860486021}
-  changeGameModeButton: {fileID: 0}
 --- !u!222 &7199622073073591613
 CanvasRenderer:
   m_ObjectHideFlags: 0

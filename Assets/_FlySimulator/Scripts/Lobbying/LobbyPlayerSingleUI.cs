@@ -34,10 +34,12 @@ public class LobbyPlayerSingleUI : MonoBehaviour {
             System.Enum.Parse<LobbyManager.PlayerCharacter>(player.Data[LobbyManager.KEY_PLAYER_CHARACTER].Value);
         if (playerCharacter == LobbyManager.PlayerCharacter.Human)
         {
+            Debug.Log("Human should be visible");
             humanObject.SetActive(true);
         }
         else
         {
+            Debug.Log("Fly should be visible");
             flyObject.SetActive(true);
         }
     }

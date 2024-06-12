@@ -12,14 +12,14 @@ public class LobbyListSingleUI : MonoBehaviour {
     
     [SerializeField] private TextMeshProUGUI lobbyNameText;
     [SerializeField] private TextMeshProUGUI playersText;
-    [SerializeField] private TextMeshProUGUI gameModeText;
+    [SerializeField] private Button joinButton;
 
 
     private Lobby lobby;
 
 
     private void Awake() {
-        GetComponent<Button>().onClick.AddListener(() => {
+        joinButton.onClick.AddListener(() => {
             LobbyManager.Instance.JoinLobby(lobby);
         });
     }
