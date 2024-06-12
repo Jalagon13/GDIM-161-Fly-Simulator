@@ -478,10 +478,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3934507b37018c4880b82115e2ce40d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNameText: {fileID: 0}
+  playerNameText: {fileID: 6614421893028896530}
   humanObject: {fileID: 3677491074011683501}
   flyObject: {fileID: 1604360852207283203}
-  kickPlayerButton: {fileID: 0}
+  kickPlayerButton: {fileID: 1259794963133945049}
 --- !u!1001 &1910296313456922962
 PrefabInstance:
   m_ObjectHideFlags: 0

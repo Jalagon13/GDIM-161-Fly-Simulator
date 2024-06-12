@@ -16,6 +16,8 @@ public class LobbyCreateUI : MonoBehaviour {
     [SerializeField] private Button publicPrivateButton;
     [SerializeField] private TextMeshProUGUI publicPrivateText;
     [SerializeField] private TMP_InputField lobbyNameInputField;
+    [SerializeField] private GameObject inLobbyMenu;
+    [SerializeField] private GameObject errorMessage;
 
 
     private string lobbyName;
@@ -27,11 +29,20 @@ public class LobbyCreateUI : MonoBehaviour {
 
         createButton.onClick.AddListener(() => {
             UpdateLobbyNameText();
-            LobbyManager.Instance.CreateLobby(
-                lobbyName,
-                maxPlayers,
-                isPrivate
-            );
+            try
+            {
+                LobbyManager.Instance.CreateLobby(
+                    lobbyName,
+                    maxPlayers,
+                    isPrivate
+                );
+                this.gameObject.SetActive( false );
+                inLobbyMenu.SetActive( true );
+            }
+            catch
+            {
+                errorMessage.SetActive(true);
+            }
         });
 
 

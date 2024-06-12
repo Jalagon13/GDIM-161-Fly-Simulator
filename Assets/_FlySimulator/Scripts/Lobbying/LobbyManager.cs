@@ -17,6 +17,9 @@ public class LobbyManager : MonoBehaviour {
 
     public const string KEY_PLAYER_NAME = "PlayerName";
     public const string KEY_PLAYER_CHARACTER = "Character";
+    [SerializeField] private GameObject errorMessage;
+
+    public event EventHandler LobbyErrorOccur;
 
 
 
@@ -50,6 +53,13 @@ public class LobbyManager : MonoBehaviour {
 
     private void Awake() {
         Instance = this;
+        LobbyErrorOccur += DisplayError;
+    }
+
+    private void DisplayError(object sender, EventArgs e)
+    {
+        errorMessage.SetActive(true);
+        Debug.Log("Error displayed");
     }
 
     private void Update() {
@@ -197,6 +207,8 @@ public class LobbyManager : MonoBehaviour {
     }
 
     public async void JoinLobbyByCode(string lobbyCode) {
+        try
+        {
         Player player = GetPlayer(false);
 
         Lobby lobby = await LobbyService.Instance.JoinLobbyByCodeAsync(lobbyCode, new JoinLobbyByCodeOptions {
@@ -206,16 +218,30 @@ public class LobbyManager : MonoBehaviour {
         joinedLobby = lobby;
 
         OnJoinedLobby?.Invoke(this, new LobbyEventArgs { lobby = lobby });
+        }
+        catch
+        {
+            LobbyErrorOccur.Invoke(this, EventArgs.Empty);
+        }
     }
 
     public async void JoinLobby(Lobby lobby) {
-        Player player = GetPlayer(false);
+        try
+        {
+            Player player = GetPlayer(false);
 
-        joinedLobby = await LobbyService.Instance.JoinLobbyByIdAsync(lobby.Id, new JoinLobbyByIdOptions {
-            Player = player
-        });
+            joinedLobby = await LobbyService.Instance.JoinLobbyByIdAsync(lobby.Id, new JoinLobbyByIdOptions
+            {
+                Player = player
+            });
 
-        OnJoinedLobby?.Invoke(this, new LobbyEventArgs { lobby = lobby });
+            OnJoinedLobby?.Invoke(this, new LobbyEventArgs { lobby = lobby });
+        }
+        catch (LobbyServiceException e)
+        {
+            Debug.Log(e);
+            LobbyErrorOccur.Invoke(this, EventArgs.Empty);
+        }
     }
 
     public async void UpdatePlayerName(string playerName) {
@@ -239,8 +265,11 @@ public class LobbyManager : MonoBehaviour {
                 joinedLobby = lobby;
 
                 OnJoinedLobbyUpdate?.Invoke(this, new LobbyEventArgs { lobby = joinedLobby });
-            } catch (LobbyServiceException e) {
+            }
+            catch (LobbyServiceException e)
+            {
                 Debug.Log(e);
+                LobbyErrorOccur.Invoke(this, EventArgs.Empty);
             }
         }
     }
@@ -280,6 +309,7 @@ public class LobbyManager : MonoBehaviour {
             OnJoinedLobby?.Invoke(this, new LobbyEventArgs { lobby = lobby });
         } catch (LobbyServiceException e) {
             Debug.Log(e);
+            LobbyErrorOccur.Invoke(this, EventArgs.Empty);
         }
     }
 

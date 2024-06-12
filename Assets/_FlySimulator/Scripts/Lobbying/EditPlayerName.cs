@@ -38,7 +38,7 @@ public class EditPlayerName : MonoBehaviour {
         Debug.Log("Added Listener to authenticateButton onClick!");
         authenticateButton.onClick.AddListener(() => {
             UpdateNameText();
-            OnNameChanged.Invoke(this, new EventArgs());
+            OnNameChanged.Invoke(this, EventArgs.Empty);
         });
     }
 
