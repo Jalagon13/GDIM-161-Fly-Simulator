@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Services.Lobbies.Models;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,7 +17,11 @@ public class LobbyListUI : MonoBehaviour {
 
     [SerializeField] private Transform lobbySingleTemplate;
     [SerializeField] private Transform container;
+    [SerializeField] private TMP_InputField joinCodeInputField;
+    [SerializeField] private Button joinButton;
     [SerializeField] private Button refreshButton;
+
+    private string currentJoinCode;
 
 
     private void Awake() {
@@ -25,6 +30,7 @@ public class LobbyListUI : MonoBehaviour {
         lobbySingleTemplate.gameObject.SetActive(false);
 
         refreshButton.onClick.AddListener(RefreshButtonClick);
+        joinButton.onClick.AddListener(JoinButtonClick);
     }
 
     private void Start() {
@@ -50,6 +56,12 @@ public class LobbyListUI : MonoBehaviour {
         UpdateLobbyList(e.lobbyList);
     }
 
+    private void UpdateJoinCodeText()
+    {
+        currentJoinCode = ValidateText.ReturnValidString(joinCodeInputField.text);
+        Debug.Log($"Updated currentJoinCode to {currentJoinCode}");
+    }
+
     private void UpdateLobbyList(List<Lobby> lobbyList) {
         foreach (Transform child in container) {
             if (child == lobbySingleTemplate) continue;
@@ -67,6 +79,11 @@ public class LobbyListUI : MonoBehaviour {
 
     private void RefreshButtonClick() {
         LobbyManager.Instance.RefreshLobbyList();
+    }
+
+    private void JoinButtonClick()
+    {
+        LobbyManager.Instance.JoinLobbyByCode(currentJoinCode);
     }
 
     private void Hide() {
