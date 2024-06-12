@@ -88,7 +88,7 @@ public class LobbyManager : MonoBehaviour {
 
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
         }
-        catch (LobbyServiceException e)
+        catch (AuthenticationException e)
         {
             Debug.Log(e);
             LobbyErrorOccur.Invoke(this, EventArgs.Empty);

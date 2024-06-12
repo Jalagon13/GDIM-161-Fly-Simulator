@@ -57,7 +57,7 @@ public class LobbyCreateUI : MonoBehaviour {
 
     private void UpdateLobbyNameText()
     {
-        lobbyName = ValidateText.ReturnValidString(lobbyNameInputField.text);
+        lobbyName = ValidateText.ReturnValidString(lobbyNameInputField.text, true);
         Debug.Log($"Updated LobbyNameText to {lobbyName}");
     }
 

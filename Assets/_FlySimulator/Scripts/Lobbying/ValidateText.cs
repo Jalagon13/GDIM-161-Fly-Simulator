@@ -10,12 +10,12 @@ public class ValidateText : MonoBehaviour
 
     private static char[] allowedLetters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-_".ToCharArray();
 
-    public static string ReturnValidString(string newName)
+    public static string ReturnValidString(string newName, bool withSpaces = false)
     {
         string validName = "";
         foreach (char letter in newName)
         {
-            if (allowedLetters.Contains(letter))
+            if (allowedLetters.Contains(letter) || (withSpaces && letter == ' '))
             {
                 validName += letter;
             }
