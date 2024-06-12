@@ -466,7 +466,7 @@ MonoBehaviour:
   container: {fileID: 1171397291040944934}
   lobbyNameText: {fileID: 1510675077768533784}
   playerCountText: {fileID: 5813463514635794063}
-  lobbyCodeText: {fileID: 0}
+  lobbyCodeText: {fileID: 7332338673857793983}
   leaveLobbyButton: {fileID: 5844325892860486021}
 --- !u!222 &7199622073073591613
 CanvasRenderer:
