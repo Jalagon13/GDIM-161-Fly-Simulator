@@ -21,8 +21,6 @@ public class EditPlayerName : MonoBehaviour {
     [SerializeField] private TMP_InputField UI_InputWindow;
     [SerializeField] private Button authenticateButton;
 
-    private char[] allowedLetters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-_".ToCharArray();
-
 
     private string playerName = "";
 
@@ -46,23 +44,8 @@ public class EditPlayerName : MonoBehaviour {
 
     private void UpdateNameText()
     {
-        playerName = ReturnValidString(playerNameText.text);
+        playerName = ValidateText.ReturnValidString(playerNameText.text);
         Debug.Log($"Updated PlayerNameText to {playerName}");
-    }
-
-    private string ReturnValidString(string newName)
-    {
-        string validName = "";
-        foreach (char letter in newName)
-        {
-            if (allowedLetters.Contains(letter))
-            {
-                validName += letter;
-            }
-        }
-        if(validName.Length > 29) { return validName.Substring(0, 29); }
-        return validName;
-        
     }
 
     private void EditPlayerName_OnNameChanged(object sender, EventArgs e)
