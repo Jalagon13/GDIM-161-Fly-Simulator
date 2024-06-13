@@ -22,7 +22,6 @@ public class LobbyCreateUI : MonoBehaviour {
 
     private string lobbyName;
     private bool isPrivate;
-    private int maxPlayers = 4;
 
     private void Awake() {
         Instance = this;
@@ -33,7 +32,7 @@ public class LobbyCreateUI : MonoBehaviour {
             {
                 LobbyManager.Instance.CreateLobby(
                     lobbyName,
-                    maxPlayers,
+                    LobbyManager.MAXIMUM_LOBBY_PLAYERS,
                     isPrivate
                 );
                 this.gameObject.SetActive( false );
@@ -69,7 +68,6 @@ public class LobbyCreateUI : MonoBehaviour {
         Debug.Log("Performing OnEnable function!");
         lobbyName = "MyLobby";
         isPrivate = false;
-        maxPlayers = 4;
 
         UpdateText();
     }

@@ -717,10 +717,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 607824353}
     - target: {fileID: 5270956998832743641, guid: a6dee43aa2ef46c4e8839b9a5f3a4524, type: 3}
-      propertyPath: joinLobbyUI
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5270956998832743641, guid: a6dee43aa2ef46c4e8839b9a5f3a4524, type: 3}
       propertyPath: errorMessage
       value: 
       objectReference: {fileID: 1680478064}

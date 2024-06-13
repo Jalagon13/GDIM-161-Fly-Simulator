@@ -15,9 +15,12 @@ public class LobbyManager : MonoBehaviour {
 
     public static LobbyManager Instance { get; private set; }
 
+    public static int MAXIMUM_LOBBY_PLAYERS = 4;
+
 
     public const string KEY_PLAYER_NAME = "PlayerName";
     public const string KEY_PLAYER_CHARACTER = "Character";
+    public const string KEY_START_GAME = "StartCode";
     [SerializeField] private GameObject findLobbyUI;
     [SerializeField] private GameObject createLobbyUI;
     [SerializeField] private GameObject inLobbyUI;
@@ -143,6 +146,18 @@ public class LobbyManager : MonoBehaviour {
 
                     joinedLobby = null;
                 }
+
+                if (joinedLobby.Data[KEY_START_GAME].Value != "0")
+                {
+                    if (!IsLobbyHost())
+                    {
+
+                        StartGame?.Invoke(this, new LobbyEventArgs { lobby = LobbyManager.Instance.GetJoinedLobby() });
+                        RelayManager.Instance.JoinRelay(joinedLobby.Data[KEY_START_GAME].Value);
+                    }
+
+                    joinedLobby = null;
+                }
             }
         }
     }
@@ -188,7 +203,11 @@ public class LobbyManager : MonoBehaviour {
 
         CreateLobbyOptions options = new CreateLobbyOptions {
             Player = player,
-            IsPrivate = isPrivate
+            IsPrivate = isPrivate,
+            Data = new Dictionary<string, DataObject>
+            {
+                { KEY_START_GAME, new DataObject(DataObject.VisibilityOptions.Member, "0") }
+            }
         };
 
         Lobby lobby = await LobbyService.Instance.CreateLobbyAsync(lobbyName, maxPlayers, options);
@@ -207,12 +226,22 @@ public class LobbyManager : MonoBehaviour {
         }
     }
 
-    public void StartGameMethod()
+    public async void StartGameMethod()
     {
         if (joinedLobby != null && joinedLobby.Players.Count == joinedLobby.MaxPlayers)
         {
             StartGame?.Invoke(this, new LobbyEventArgs { lobby = LobbyManager.Instance.GetJoinedLobby() });
             Debug.Log("StartGame event invoked!");
+
+            string relayCode = await RelayManager.Instance.CreateRelay();
+
+            Lobby lobby = await Lobbies.Instance.UpdateLobbyAsync(joinedLobby.Id, new UpdateLobbyOptions
+            {
+                Data = new Dictionary<string, DataObject>
+                {
+                    { KEY_START_GAME, new DataObject(DataObject.VisibilityOptions.Member, relayCode)}
+                }
+            });
             /*if (IsLobbyHost())
             {
                 NetworkManager.Singleton.StartHost();

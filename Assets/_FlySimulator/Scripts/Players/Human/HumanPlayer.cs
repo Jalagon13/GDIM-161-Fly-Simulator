@@ -7,7 +7,7 @@ public class HumanPlayer : MonoBehaviour
 {
     private void Start()
     {
-        GameManager.Instance.JoinRound(OnRoundStart, OnRoundEnd, gameObject, true);
+        GameManager.Instance.JoinGame(OnRoundStart, OnRoundEnd, gameObject, true);
     }
 
     private void OnRoundStart()

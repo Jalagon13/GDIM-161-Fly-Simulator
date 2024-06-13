@@ -8,7 +8,7 @@ public class FlyPlayer : MonoBehaviour
     
     private void Start()
     {
-        GameManager.Instance.JoinRound(OnRoundStart, OnRoundEnd, this.gameObject, true);
+        GameManager.Instance.JoinGame(OnRoundStart, OnRoundEnd, this.gameObject, true);
     }
 
     private void OnRoundStart()

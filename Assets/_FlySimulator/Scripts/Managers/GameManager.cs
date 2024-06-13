@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using Unity.Services.Authentication;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,6 +14,12 @@ public class GameManager : NetworkBehaviour
     public NetworkVariable<int> HumanHealth { get; private set; } = new NetworkVariable<int>(startHumanHealth,
                                                                                             NetworkVariableReadPermission.Everyone,
                                                                                             NetworkVariableWritePermission.Server);
+    public NetworkVariable<int> HumanRoundsWon { get; private set; } = new NetworkVariable<int>(0,
+                                                                                            NetworkVariableReadPermission.Everyone,
+                                                                                            NetworkVariableWritePermission.Server);
+    public NetworkVariable<int> FlyRoundsWon { get; private set; } = new NetworkVariable<int>(0,
+                                                                                            NetworkVariableReadPermission.Everyone,
+                                                                                            NetworkVariableWritePermission.Server);
     public NetworkVariable<float> TimeLeft { get; private set; } = new NetworkVariable<float>(startHumanHealth,
                                                                                             NetworkVariableReadPermission.Everyone,
                                                                                             NetworkVariableWritePermission.Server);
@@ -21,10 +28,11 @@ public class GameManager : NetworkBehaviour
     [SerializeField] private static int playersToStartRound = 4;
     [SerializeField] private static int startHumanHealth = 100;
     [SerializeField] private static float roundTime = 120;  // seconds
+    [SerializeField] private static float timeBetweenRounds = 10; // seconds
     
     private List<GameObject> _flyPlayers;
     private GameObject _humanPlayer;
-    private bool _canJoinRound;
+    private bool _canJoinGame;
     private GameManager.RoundMode roundState;
 
     private enum RoundMode
@@ -43,7 +51,7 @@ public class GameManager : NetworkBehaviour
             DontDestroyOnLoad(gameObject);
             _flyPlayers = new();
             _humanPlayer = null;
-            _canJoinRound = true;
+            _canJoinGame = true;
             roundState = RoundMode.Menu;
         }
         else
@@ -94,20 +102,70 @@ public class GameManager : NetworkBehaviour
     private void OnStartGame(object sender, LobbyManager.LobbyEventArgs e)
     {
         SceneManager.LoadScene("netcoding");
-        _flyPlayers.Add(null);                  //FIND PLAYERS SOMEHOW
-        _humanPlayer = null;                    //FIND PLAYERS SOMEHOW
+        if (IsHost)
+        {
+            Debug.Log("I AM THE HOST! I am adding references of everyone's player objects to my GameManager");
+            //StartCoroutine(WaitForEveryoneToConnect_ThenAddThemToGameManagerReferences());
+        }
+    }
+
+    private IEnumerator WaitForEveryoneToConnect_ThenAddThemToGameManagerReferences()
+    {
+        //Starts round after everyone is in and added to the lists.
+        while (NetworkManager.Singleton.ConnectedClients.Count < LobbyManager.MAXIMUM_LOBBY_PLAYERS)
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
+        foreach (KeyValuePair<ulong, NetworkClient> clientPair in NetworkManager.Singleton.ConnectedClients)
+        {
+            NetworkClient client = clientPair.Value;
+            if (client.ClientId == NetworkManager.LocalClientId)
+            {
+                _humanPlayer = client.PlayerObject.gameObject;
+                Debug.Log("Adding Human.");
+            }
+            else
+            {
+                _flyPlayers.Add(client.PlayerObject.gameObject);
+                Debug.Log("Adding Fly.");
+            }
+        }
+        StartNewGame();
+    }
+
+    private void StartNewGame()
+    {
+        HumanRoundsWon.Value = 0;
+        FlyRoundsWon.Value = 0;
+        StartRound();
     }
 
     private void FlyWinRound()
     {
         OnRoundEnd?.Invoke();
         Debug.Log("Flies win!");
+        if (FlyRoundsWon.Value == 3)
+        {
+            //display Victory UI, activate button for starting a new game, and a button for Quit to Menu
+        }
+        else
+        {
+            RestartRoundAfterSeconds(timeBetweenRounds);
+        }
     }
 
     private void HumanWinRound()
     {
         OnRoundEnd?.Invoke();
         Debug.Log("Human wins!");
+        if (HumanRoundsWon.Value == 3)
+        {
+            //display Victory UI, activate button for starting a new game, and a button for Quit to Menu
+        }
+        else
+        {
+            RestartRoundAfterSeconds(timeBetweenRounds);
+        }
     }
 
     IEnumerator RestartRoundAfterSeconds(float seconds)
@@ -134,9 +192,9 @@ public class GameManager : NetworkBehaviour
         }
     }
 
-    public void JoinRound(Action roundStartCallback, Action roundEndCallback, GameObject player, bool human)
+    public void JoinGame(Action roundStartCallback, Action roundEndCallback, GameObject player, bool human)
     {
-        if (!_canJoinRound)
+        if (!_canJoinGame)
         {
             return;
         }
@@ -154,8 +212,8 @@ public class GameManager : NetworkBehaviour
         OnRoundEnd += roundEndCallback;
         if (OnRoundStart.GetInvocationList().Length == playersToStartRound)
         {
-            _canJoinRound = false;
-            StartRound();
+            _canJoinGame = false;
+            StartNewGame();
         }
     }
 }
