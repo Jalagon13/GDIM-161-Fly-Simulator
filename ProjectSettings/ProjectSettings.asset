@@ -754,11 +754,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 3a5596fe-4ad9-4f19-b222-6a6e9fc0abdd
+  cloudProjectId: bd59761e-628a-43c2-a3d9-f5184db2a10e
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: GDIM-161-Fly-Simulator
-  organizationId: jalagon13
+  projectName: GDIM-161-Fly-Simulator-Demo
+  organizationId: alainak
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
