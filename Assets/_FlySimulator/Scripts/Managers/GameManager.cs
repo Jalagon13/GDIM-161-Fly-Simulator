@@ -30,8 +30,8 @@ public class GameManager : NetworkBehaviour
     [SerializeField] private static float roundTime = 120;  // seconds
     [SerializeField] private static float timeBetweenRounds = 10; // seconds
     
-    private List<GameObject> _flyPlayers;
-    private GameObject _humanPlayer;
+    [SerializeField] private List<GameObject> _flyPlayers;
+    [SerializeField] private GameObject _humanPlayer;
     private bool _canJoinGame;
     private GameManager.RoundMode roundState;
 
