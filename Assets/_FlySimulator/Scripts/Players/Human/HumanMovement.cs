@@ -13,6 +13,7 @@ public class HumanMovement : NetworkBehaviour//using netcode connection
 	[SerializeField] private float _jumpHeight = 3.5f;
 	[SerializeField] private LayerMask _groundMask;
 	[SerializeField] private Animator animator;
+	[SerializeField] private AudioSource humanMoveSound;
 
     private Camera playerCamera;
     private Vector3 _verticalVelocity = Vector3.zero;
@@ -57,7 +58,6 @@ public class HumanMovement : NetworkBehaviour//using netcode connection
         }
 
         Vector3 horizontalVelocity = (transform.right * _horizontalInput.x + transform.forward * _horizontalInput.y) * _speed;
-
         _controller.Move(horizontalVelocity * Time.deltaTime);
 
         if (_jump)
@@ -72,7 +72,15 @@ public class HumanMovement : NetworkBehaviour//using netcode connection
 
         _verticalVelocity.y += _gravity * Time.deltaTime;
         _controller.Move(_verticalVelocity * Time.deltaTime);
-		if (horizontalVelocity.x > 0 || horizontalVelocity.y > 0 || horizontalVelocity.z > 0)
+        if (_verticalVelocity != Vector3.zero || horizontalVelocity == Vector3.zero)
+        {
+	        humanMoveSound.Pause();
+        }
+        else
+        {
+	        humanMoveSound.UnPause();
+        }
+        if (horizontalVelocity.x > 0 || horizontalVelocity.y > 0 || horizontalVelocity.z > 0)
 		{
 			animator.SetBool("IsMoving", true);
 		}

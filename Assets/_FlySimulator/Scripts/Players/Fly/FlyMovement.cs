@@ -14,6 +14,7 @@ public class FlyMovement : NetworkBehaviour//using netcode connection
 	[SerializeField] private float _verticalSpeed = 7f;
 	[SerializeField] private float _sensitivityX = 8f;
 	[SerializeField] private float _sensitivityY = 0.5f;
+	[SerializeField] private AudioSource flyMoveSound;
 	
 	private PlayerInput _playerInput;
 	private Vector2 _horizontalInput;
@@ -61,6 +62,15 @@ public class FlyMovement : NetworkBehaviour//using netcode connection
 
 		Vector3 verticalVelocity = _verticalInput * _verticalSpeed * transform.up;
 		_controller.Move(verticalVelocity * Time.deltaTime);
+
+		if (horizontalVelocity + verticalVelocity == Vector3.zero)
+		{
+			flyMoveSound.Pause();
+		}
+		else
+		{
+			flyMoveSound.UnPause();
+		}
 		
 		float mouseX = _mouseInput.x * _sensitivityX * Time.deltaTime;
 		float mouseY = _mouseInput.y * _sensitivityY * Time.deltaTime;

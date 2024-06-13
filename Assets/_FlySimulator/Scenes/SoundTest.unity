@@ -367,12 +367,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63492097ca582461ba04c728f07a11b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audio: {fileID: 1193424171}
+  audioPlayer: {fileID: 0}
   timerStartCountdown: {fileID: 8300000, guid: 58a46a6d74db342e2a4ee4c672e5f83a, type: 3}
   timerStart: {fileID: 8300000, guid: 919d257a39e30442983349b5ecd6db13, type: 3}
   timerEndCountdown: {fileID: 8300000, guid: 4de8a8413643945a291f73d3c2d47284, type: 3}
   timerEnd: {fileID: 8300000, guid: d97534ddfd8a044a4ae71900f29e5069, type: 3}
   carScreech: {fileID: 8300000, guid: b444a58de660e43c28bd227018fde024, type: 3}
+  ghostFly: {fileID: 0}
 --- !u!4 &1193424173
 Transform:
   m_ObjectHideFlags: 0
